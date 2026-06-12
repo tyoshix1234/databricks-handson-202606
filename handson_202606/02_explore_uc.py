@@ -188,7 +188,7 @@ display(spark.sql(f"""
 # MAGIC %md
 # MAGIC ## Step 5: Genie Code（セル内AIアシスタント）を使ってみる
 # MAGIC
-# MAGIC セル右上の **✨ ランプアイコン** から Genie Code を開き、自然言語でクエリを生成できます。
+# MAGIC 本セルの下にカーソルを合わせると表示される **Genie Code** のボタンをクリックします。そこでは自然言語でクエリを作成できます。
 # MAGIC
 # MAGIC **プロンプト例**：「テクノロジーカテゴリの月別の読了率を計算して」
 # MAGIC

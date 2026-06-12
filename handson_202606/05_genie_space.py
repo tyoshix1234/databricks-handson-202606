@@ -23,7 +23,7 @@
 # MAGIC ## Step 1: テーブル・カラムにコメントを付ける
 # MAGIC
 # MAGIC Genie はテーブル・カラムのコメントを読んでデータの意味を理解します。
-# MAGIC `02` では生テーブルに AI でコメントを付けましたが、ここでは Genie に使わせる **Gold / Silver** テーブルにコメントを付けます。
+# MAGIC `02` では生テーブルに AI でコメントを付けましたが、ここでは Genie に使わせる **Gold / Silver** テーブルに手動でコメントを付けます。
 # MAGIC
 # MAGIC > Genie 精度の優先順位: **SQL式 > サンプルSQL > テキスト指示**。その土台がテーブル・カラムコメントです。
 
@@ -85,13 +85,15 @@
 # MAGIC |---|---|
 # MAGIC | 1 | 左サイドバー → **Genie** → **「New」/「Genie スペースを作成」** |
 # MAGIC | 2 | **テーブルを追加**: `gold_monthly_engagement`, `gold_member_segment`, `gold_paywall_conversion`, `silver_subscriptions` を選択 |
-# MAGIC | 3 | 名前: `202606_handson_<苗字>` |
+# MAGIC | 3 | 名前: 画面右上の **Configure** ボタンから `202606_handson_<苗字>` に変更 |
 # MAGIC | 4 | SQL Warehouse: デフォルトを選択 |
 
 # COMMAND ----------
 
 # MAGIC %md
 # MAGIC ## Step 3: まずはメタデータだけで質問してみる（Instructions なし）
+# MAGIC
+# MAGIC > ⚙️ 質問する前に、モードを **Agent モードから Chat モードに切り替え**ておきましょう。
 # MAGIC
 # MAGIC `04_analysis` で手こずった問いを、そのまま日本語で投げてみましょう。
 # MAGIC
@@ -112,6 +114,8 @@
 # MAGIC ## Step 4: Instructions で社内用語を教える
 # MAGIC
 # MAGIC Genie Space の **設定（⚙️）→ 指示（Instructions）** の **テキスト** に以下を貼り付けてください。
+# MAGIC
+# MAGIC 貼り付けたら、画面上部の **鉛筆マーク（Start a new chat）** を押して、新しいチャットで仕切り直しましょう。
 
 # COMMAND ----------
 
@@ -131,6 +135,11 @@
 # MAGIC   最後の行動（gold_member_segment.last_event_date）からデータ上の最新日まで90日以上経過している会員。離脱予備軍。
 # MAGIC - 「課金導線の改善ターゲット」= ペイウォール接触が多いのに転換率が低い年代。
 # MAGIC ```
+# MAGIC
+# MAGIC ---
+# MAGIC > 🚀 **発展**: 今回は Instructions（テキスト指示）で精度の改善を試みていますが、実運用では
+# MAGIC > **カラムのシノニム（同義語）設定や、Genie が扱いやすいテーブル設計（適切な粒度・命名・コメント）で補う方が、精度が上がる可能性が高い**です。
+# MAGIC > Instructions はあくまで最終調整。まずはメタデータ（コメント・シノニム）とデータモデルを整えるのが王道です。
 
 # COMMAND ----------
 
@@ -144,6 +153,24 @@
 # MAGIC
 # MAGIC > **体験のポイント**: メタデータだけでは答えられなかった社内用語が、Instructions を足すだけで正しく答えられるようになりました。
 # MAGIC > 意図と違う SQL が生成されたら Instructions を調整する。これが **Genie Space のチューニング** です。
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ## Step 6: Agent モードで「抽象的な問い」からインサイトを得る
+# MAGIC
+# MAGIC ここまでは具体的な質問（Chat モード）でした。最後に、モードを **Agent モードに切り替えて**、
+# MAGIC もっと**抽象的・ビジネス的な問い**を投げてみましょう。Agent は自分で複数のクエリを組み立て・実行しながら、
+# MAGIC 答えにたどり着こうとします。
+# MAGIC
+# MAGIC ### 投げてみる質問の例
+# MAGIC - **「より有償ユーザーを増やすにはどうすればいい？」**
+# MAGIC - 「解約を減らすために、まず手を打つべきセグメントは？」
+# MAGIC - 「エンゲージメントが落ちている領域と、その打ち手の仮説を出して」
+# MAGIC
+# MAGIC > 💡 Agent は「ペイウォール接触は多いが転換率の低い年代」「特定カテゴリの読了率低下」「サイレント離脱予備軍」などを
+# MAGIC > 自分で調べて、示唆（インサイト）や次のアクションの仮説まで返してくれます。
+# MAGIC > **一発の正解を出す道具ではなく、分析の壁打ち相手**として使うイメージです。返ってきた根拠（生成SQL）も必ず確認しましょう。
 
 # COMMAND ----------
 

@@ -100,6 +100,9 @@ display(spark.sql(f"SELECT * FROM {catalog}.{schema}.gold_paywall_conversion LIM
 # MAGIC %md
 # MAGIC ## 問3:（難）サイレント離脱の予兆 — 「まだ解約していないが、最近読んでいない有料会員」
 # MAGIC
+# MAGIC > 🤖 **問3以降は、画面右上の Genie Code も頼っていきましょう！**
+# MAGIC > 「この問題3を解いて」と Genie Code に指示して解いてみても OK！
+# MAGIC
 # MAGIC 解約に至っていなくても、**しばらく記事を読んでいない有料会員**は離脱リスクが高いはず。
 # MAGIC 「有料 / プレミアム会員のうち、直近90日間まったく読んでいない人」を抽出してみましょう。
 # MAGIC

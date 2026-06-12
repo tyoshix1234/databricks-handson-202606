@@ -91,7 +91,7 @@
 # COMMAND ----------
 
 # MAGIC %md
-# MAGIC ## 5. Genie Code / Genie Space で聞いてみる
+# MAGIC ## 5. これを Genie Code に聞いてみる
 # MAGIC
 # MAGIC コスト分析も自然言語で。例:
 # MAGIC - 「直近7日で最もDBUを消費したSKUは？」
